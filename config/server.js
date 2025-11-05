@@ -5,7 +5,7 @@ module.exports = ({ env }) => ({
   app: {
     keys: env.array('APP_KEYS'),
   },
-  url: env('PUBLIC_URL', 'http://localhost:1337'),
+  url: env('PUBLIC_URL', 'https://backend-strapi-1-tcik.onrender.com'),
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
