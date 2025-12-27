@@ -19,7 +19,7 @@ module.exports = [
     config: {
       enabled: true,
       origin: [
-        'http://localhost:5173', // 👈 Your local frontend
+        'https://front-end-livid-one.vercel.app', // 👈 Your live frontend
         'https://backend-strapi-1-tcik.onrender.com', // 👈 Your backend
         // You can add your production frontend here later
       ],
