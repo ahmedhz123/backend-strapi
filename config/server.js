@@ -9,4 +9,15 @@ module.exports = ({ env }) => ({
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
+  // Add timeout settings to prevent ETIMEDOUT errors
+  proxy: true,
+  cron: {
+    enabled: false,
+  },
+  // HTTP server timeout settings (in milliseconds)
+  timeout: 60000, // 60 seconds for HTTP requests
+  // Keep-alive timeout
+  keepAliveTimeout: 65000, // 65 seconds
+  // Headers timeout
+  headersTimeout: 66000, // 66 seconds
 });
