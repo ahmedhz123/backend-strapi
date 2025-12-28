@@ -1,6 +1,10 @@
 module.exports = ({ env }) => [
   'strapi::errors',
   {
+    name: 'global::url-rewrite',
+    config: {},
+  },
+  {
     name: 'strapi::security',
     config: {
       contentSecurityPolicy: {
