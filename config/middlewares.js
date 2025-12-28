@@ -1,4 +1,4 @@
-module.exports = [
+module.exports = ({ env }) => [
   'strapi::errors',
   {
     name: 'strapi::security',
@@ -18,12 +18,17 @@ module.exports = [
     name: 'strapi::cors',
     config: {
       enabled: true,
+      // Add all your Vercel URLs here - both production and preview URLs
       origin: [
-        'https://front-end-livid-one.vercel.app',
+        env('FRONTEND_URL', 'https://front-end-livid-one.vercel.app'), // Production URL from env or default
+        'https://front-end-git-main-ahmed-zakis-projects-1ad5a17d.vercel.app', // Preview URL from error
+        ...(env('ALLOWED_ORIGINS', '').split(',').filter(Boolean)), // Additional origins from env variable (comma-separated)
         'https://backend-strapi-1-tcik.onrender.com',
         'http://localhost:5173',
         'http://localhost:3000',
         'http://localhost:5174',
+        // Add more Vercel preview URLs as needed - they change with each deployment
+        // Or set ALLOWED_ORIGINS env variable in Render: "url1,url2,url3"
       ],
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
@@ -33,9 +38,6 @@ module.exports = [
         'Origin',
         'Accept',
         'X-Requested-With',
-        'Access-Control-Allow-Origin',
-        'Access-Control-Allow-Headers',
-        'Access-Control-Allow-Methods',
       ],
       keepHeaderOnError: true,
     },
