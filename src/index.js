@@ -8,6 +8,19 @@ module.exports = {
    * This gives you an opportunity to extend code.
    */
   register({ strapi }) {
+    // URL rewriting middleware: rewrite /api/products to /api/product
+    strapi.server.use(async (ctx, next) => {
+      // Rewrite /api/products to /api/product to match Strapi's default route
+      if (ctx.url.startsWith('/api/products')) {
+        ctx.url = ctx.url.replace('/api/products', '/api/product');
+        // Also update the path for route matching
+        if (ctx.request.path) {
+          ctx.request.path = ctx.request.path.replace('/api/products', '/api/product');
+        }
+      }
+      await next();
+    });
+
     // Add custom middleware for better error handling and logging
     strapi.server.use(async (ctx, next) => {
       const start = Date.now();

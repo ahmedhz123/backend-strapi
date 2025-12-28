@@ -6,11 +6,13 @@
 **Problem:** Frontend was calling `/api/products` (plural) but Strapi was only exposing `/api/product` (singular).
 
 **Solution:** 
-- Added custom routes in `src/api/product/routes/product.js` to handle both `/api/product` and `/api/products`
-- This ensures backward compatibility and matches frontend expectations
+- Added URL rewriting middleware in `src/index.js` that rewrites `/api/products` to `/api/product` before routing
+- This approach is cleaner and doesn't break Strapi's internal router structure
+- Keeps the default router intact while supporting the plural endpoint the frontend expects
 
 **Files Modified:**
-- `src/api/product/routes/product.js`
+- `src/index.js` - Added URL rewriting middleware
+- `src/api/product/routes/product.js` - Reverted to default router (kept simple)
 
 ---
 
@@ -212,4 +214,5 @@ After deployment, test the following:
 3. Test all endpoints
 4. Monitor logs for any remaining issues
 5. Update this documentation if additional fixes are needed
+
 
